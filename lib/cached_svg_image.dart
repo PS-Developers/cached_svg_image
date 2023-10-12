@@ -26,7 +26,8 @@ class CachedNetworkSvgImage extends StatefulWidget {
       this.colorFilter,
       this.theme,
       this.color,
-      this.colorBlendMode = BlendMode.srcIn})
+      this.colorBlendMode = BlendMode.srcIn,
+      this.forceRefresh = false})
       : super(key: key);
 
   final String loadinggif;
@@ -47,6 +48,7 @@ class CachedNetworkSvgImage extends StatefulWidget {
   final BoxFit fit;
   final bool matchTextDirection;
   final bool excludeFromSemantics;
+  final bool forceRefresh;
 
   @override
   State<CachedNetworkSvgImage> createState() => _CachedNetworkSvgImageState();
@@ -94,7 +96,14 @@ class _CachedNetworkSvgImageState extends State<CachedNetworkSvgImage> {
   }
 
   Future<File> getImageData() async {
-    File file = await DefaultCacheManager().getSingleFile(widget.url);
+    late File file;
+    if (widget.forceRefresh != true) {
+      file = await DefaultCacheManager().getSingleFile(widget.url);
+    } else {
+      var downloadedFile =
+          await DefaultCacheManager().downloadFile(widget.url, force: true);
+      file = downloadedFile.file;
+    }
     return file;
   }
 }
@@ -112,3 +121,4 @@ class CachedNetworkSvgImageManageUtils {
     DefaultCacheManager().emptyCache();
   }
 }
+
