@@ -97,7 +97,7 @@ class _CachedNetworkSvgImageState extends State<CachedNetworkSvgImage> {
 
   Future<File> getImageData() async {
     late File file;
-    if (widget.forceRefresh != true) {
+    if (!widget.forceRefresh) {
       file = await DefaultCacheManager().getSingleFile(widget.url);
     } else {
       var downloadedFile =
