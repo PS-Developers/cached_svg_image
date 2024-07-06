@@ -8,14 +8,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CachedNetworkSvgImage extends StatefulWidget {
   const CachedNetworkSvgImage(
-      {Key? key,
-      required this.loadinggif,
+      {super.key,
+      required this.loadingGif,
       required this.url,
       this.width,
       this.height,
       this.fit = BoxFit.contain,
       this.alignment = Alignment.center,
-      this.pictureProvider,
       this.placeholderBuilder,
       this.matchTextDirection = false,
       this.allowDrawingOutsideViewBox = false,
@@ -27,15 +26,13 @@ class CachedNetworkSvgImage extends StatefulWidget {
       this.theme,
       this.color,
       this.colorBlendMode = BlendMode.srcIn,
-      this.forceRefresh = false})
-      : super(key: key);
+      this.forceRefresh = false});
 
-  final String loadinggif;
+  final String loadingGif;
   final String url;
   final double? width;
   final double? height;
   final AlignmentGeometry alignment;
-  final PictureProvider? pictureProvider;
   final WidgetBuilder? placeholderBuilder;
   final bool allowDrawingOutsideViewBox;
   final String? semanticsLabel;
@@ -67,10 +64,7 @@ class _CachedNetworkSvgImageState extends State<CachedNetworkSvgImage> {
               width: widget.width,
               alignment: widget.alignment,
               allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
-              cacheColorFilter: widget.cacheColorFilter,
               clipBehavior: widget.clipBehavior,
-              color: widget.color,
-              colorBlendMode: widget.colorBlendMode,
               excludeFromSemantics: widget.excludeFromSemantics,
               fit: widget.fit,
               height: widget.height,
@@ -86,7 +80,7 @@ class _CachedNetworkSvgImageState extends State<CachedNetworkSvgImage> {
             height: widget.height,
             child: Center(
               child: Image.asset(
-                widget.loadinggif,
+                widget.loadingGif,
                 fit: BoxFit.cover,
                 alignment: Alignment.center,
               ),
@@ -121,4 +115,3 @@ class CachedNetworkSvgImageManageUtils {
     DefaultCacheManager().emptyCache();
   }
 }
-
