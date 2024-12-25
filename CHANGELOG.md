@@ -1,3 +1,6 @@
+# 0.0.8
+* TODO: update dependencies.
+
 # 0.0.7
 * TODO: example updated.
 
